@@ -1,0 +1,46 @@
+{
+  "manifest_version": "2.0.0",
+  "app_install_location": 0,
+  "supportgetappstatus": 1,
+  "requirements": {
+    "support_refconfig":1
+  },
+  "configuration": [
+    {
+      "name": "主机",
+      "type": "text",
+      "variable": "Hostname",
+      "defaultvalue": "example.wifi-auth.com",
+      "required": 1,
+      "description": "Web认证服务器的域名",
+      "regexpression": ""
+    },
+    {
+      "name": "域名路径",
+      "type": "text",
+      "variable": "Path",
+      "defaultvalue": "/",
+      "required": 1,
+      "description": "Web认证网页的路径",
+      "regexpression": ""
+    },
+    {
+      "name": "端口",
+      "type": "text",
+      "variable": "HTTPPort",
+      "defaultvalue": "80",
+      "required": 1,
+      "description": "Web认证服务器的端口号",
+      "regexpression": "^\\d{1,5}$"
+    },
+    {
+      "name": "使用SSL?",
+      "type": "radio",
+      "variable": "SSLAvailable",
+      "choices": "是=yes;否=no",
+      "defaultvalue": "yes",
+      "required": 1,
+      "description": "是否使用Https?"
+    }
+  ]
+}

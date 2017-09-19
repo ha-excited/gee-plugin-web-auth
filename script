@@ -1,0 +1,66 @@
+#!/bin/sh
+
+EXEC_NAME=wifidog
+EXEC_FILE=/etc/init.d/$EXEC_NAME
+CONF_FILE=/etc/wifidog.conf
+CONF_FILE_ORIG=/etc/wifidog.conf.orig
+
+install() {
+  echo "安装wifi-auth程序中"
+  clean
+  opkg update
+  opkg install $EXEC_NAME --force-maintainer
+  reconfigure
+  start
+  return $?
+}
+
+uninstall() {
+  echo "卸载wifi-auth程序中"
+  opkg remove $EXEC_NAME
+  clean
+  return $?
+}
+
+clean() {
+  rm -f $CONF_FILE
+  rm -f $CONF_FILE_ORIG
+  return $?
+}
+
+reconfigure() {
+  . ./*.conf
+  if [ ! -f $CONF_FILE_ORIG ]; then
+    cp $CONF_FILE $CONF_FILE_ORIG
+  else
+    cp $CONF_FILE_ORIG $CONF_FILE
+  fi
+  echo "" >> $CONF_FILE
+  echo "AuthServer {" >> $CONF_FILE
+  echo "  Hostname $Hostname" >> $CONF_FILE
+  echo "  HTTPPort $HTTPPort" >> $CONF_FILE
+  echo "  SSLAvailable $SSLAvailable" >> $CONF_FILE
+  echo "  Path $Path" >> $CONF_FILE
+  echo "}" >> $CONF_FILE
+  return $?
+}
+
+start() {
+  $EXEC_FILE start
+  return $?
+}
+
+stop() {
+  $EXEC_FILE stop
+  return $?
+}
+
+status() {
+    local stat="running"
+    pgrep $EXEC_NAME >/dev/null 2>&1
+    if [ $? -ne 0 ];then
+        stat="stopped"
+    fi
+    echo "{ \"status\" : \"$stat\" }"
+    return $?
+}
