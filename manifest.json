@@ -25,12 +25,12 @@
       "regexpression": ""
     },
     {
-      "name": "端口",
+      "name": "Http端口",
       "type": "text",
       "variable": "HTTPPort",
       "defaultvalue": "80",
       "required": 1,
-      "description": "Web认证服务器的端口号",
+      "description": "Web认证服务器的HTTP端口号",
       "regexpression": "^\\d{1,5}$"
     },
     {
@@ -41,6 +41,15 @@
       "defaultvalue": "yes",
       "required": 1,
       "description": "是否使用Https?"
+    },
+    {
+      "name": "Https端口",
+      "type": "text",
+      "variable": "SSLPort",
+      "defaultvalue": "443",
+      "required": 0,
+      "description": "Web认证服务器的SSL端口号, 如果使用SSL",
+      "regexpression": "^\\d{1,5}$"
     }
   ]
 }

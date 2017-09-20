@@ -39,6 +39,7 @@ reconfigure() {
   echo "AuthServer {" >> $CONF_FILE
   echo "  Hostname $Hostname" >> $CONF_FILE
   echo "  HTTPPort $HTTPPort" >> $CONF_FILE
+  echo "  SSLPort $SSLPort" >> $CONF_FILE
   echo "  SSLAvailable $SSLAvailable" >> $CONF_FILE
   echo "  Path $Path" >> $CONF_FILE
   echo "}" >> $CONF_FILE
